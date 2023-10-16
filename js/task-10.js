@@ -9,13 +9,19 @@ const createButton = document.querySelector("[data-create]");
 const destroyButton = document.querySelector("[data-destroy]");
 const divBoxesEl = document.querySelector("#boxes");
 
+divBoxesEl.style.display = "flex";
+divBoxesEl.style.flexWrap = "wrap";
+divBoxesEl.style.alignItems = "center";
+divBoxesEl.style.marginTop = "30px";
+
 function createBoxes(amount) {
   const elements = [];
+  let sizeDefault = 30;
   for (let i = 0; i < amount; i += 1) {
     const div = document.createElement("div");
-    const size = 30 + i * 10;
-    div.style.width = `${size}px`;
-    div.style.height = `${size}px`;
+    sizeDefault += 10;
+    div.style.width = `${sizeDefault}px`;
+    div.style.height = `${sizeDefault}px`;
     div.style.background = getRandomHexColor();
     elements.push(div);
   }
@@ -27,9 +33,11 @@ createButton.addEventListener("click", () => {
   createBoxes(inputNumberEl.value);
 });
 
-destroyButton.addEventListener("click", destroyBoxes);
-
 function destroyBoxes() {
   inputNumberEl.value = "";
   divBoxesEl.innerHTML = "";
 }
+
+destroyButton.addEventListener("click", () => {
+  destroyBoxes();
+});
